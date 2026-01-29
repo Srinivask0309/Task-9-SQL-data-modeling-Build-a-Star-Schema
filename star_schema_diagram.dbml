@@ -1,0 +1,39 @@
+
+Table dim_customer {
+  customer_id int [pk]
+  customer_name varchar
+  segment varchar
+}
+
+Table dim_product {
+  product_id int [pk]
+  product_name varchar
+  category varchar
+  sub_category varchar
+}
+
+Table dim_region {
+  region_id int [pk]
+  region varchar
+  country varchar
+  city varchar
+}
+
+Table dim_date {
+  date_id int [pk]
+  order_date date
+  year int
+  month int
+  day int
+}
+
+Table fact_sales {
+  sales_id int [pk]
+  customer_id int [ref: > dim_customer.customer_id]
+  product_id int [ref: > dim_product.product_id]
+  region_id int [ref: > dim_region.region_id]
+  date_id int [ref: > dim_date.date_id]
+  sales decimal
+  quantity int
+  profit decimal
+}
